@@ -1,0 +1,25 @@
+---
+import type { QA } from '../../data/qa';
+interface Props { email: string; cvPdf: string; items: QA[]; locale?: 'en' | 'es'; }
+const { email, cvPdf, items, locale = 'en' } = Astro.props;
+const es = locale === 'es';
+---
+<div class="ask-panel p-5 sm:p-7">
+  <p class="mb-5 text-sm font-semibold">{es ? 'Elige una pregunta' : 'Pick a question'}</p>
+  <div class="grid items-start gap-3 lg:grid-cols-2">
+    {items.map((item, index) => (
+      <details class="question-card group" open={index === 0}>
+        <summary class="flex cursor-pointer list-none items-start gap-3 p-4 font-medium marker:hidden">
+          <span class="mt-0.5 text-xs font-semibold text-accent/70">{String(index + 1).padStart(2, '0')}</span>
+          <span class="flex-1 text-sm leading-6">{item.question}</span>
+          <span class="question-icon text-accent" aria-hidden="true">+</span>
+        </summary>
+        <div class="border-t border-line px-4 pt-4 pb-5 sm:px-5"><p class="leading-7 text-ink/80">{item.answer}</p></div>
+      </details>
+    ))}
+  </div>
+  <p class="mt-5 text-xs leading-5 text-muted">
+    {es ? 'Respuestas basadas en mi experiencia profesional y mi CV. Consulta el ' : 'Answers based on my professional experience and CV. Read the '}
+    <a href={cvPdf} class="underline underline-offset-4">{es ? 'CV completo' : 'full CV'}</a>{es ? ' o escríbeme a ' : ' or email me at '}<a href={`mailto:${email}`} class="underline underline-offset-4">{email}</a>.
+  </p>
+</div>

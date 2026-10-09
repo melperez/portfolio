@@ -1,0 +1,14 @@
+---
+interface Props {
+  group: string;
+  items: string[];
+}
+const { group, items } = Astro.props;
+---
+
+<div>
+  <h3 class="mb-2 text-sm font-semibold">{group}</h3>
+  <ul class="flex flex-wrap gap-1.5">
+    {items.map((i) => <li class="chip rounded-full border border-line px-3 py-1 text-sm">{i}</li>)}
+  </ul>
+</div>

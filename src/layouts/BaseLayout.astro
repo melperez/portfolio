@@ -1,0 +1,52 @@
+---
+import '../styles/global.css';
+import '../styles/theme.css';
+import { getProfile } from '../lib/content';
+import { withBase } from '../lib/paths';
+import { profileEs, ui, type Locale } from '../i18n';
+interface Props { title?: string; description?: string; locale?: Locale; alternatePath?: string; }
+const profile = await getProfile();
+const locale = Astro.props.locale ?? 'en';
+const t = ui[locale];
+const title = Astro.props.title ?? `${profile.name} · ${locale === 'es' ? profileEs.headline : profile.headline}`;
+const description = Astro.props.description ?? (locale === 'es' ? profileEs.summary : profile.summary.trim()).slice(0, 160);
+const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : undefined;
+const ogImage = Astro.site ? new URL(withBase('/og-image.png'), Astro.site).href : undefined;
+const root = locale === 'es' ? '/es/' : '/';
+const nav = [
+  { id: 'experience', label: t.nav.experience }, { id: 'projects', label: t.nav.projects },
+  { id: 'ask', label: t.nav.ask }, { id: 'skills', label: t.nav.skills }, { id: 'contact', label: t.nav.contact },
+];
+const current = Astro.url.pathname;
+let alternate = Astro.props.alternatePath;
+if (!alternate) alternate = locale === 'es' ? current.replace(/\/es(?=\/|$)/, '') || '/' : `/es${current}`;
+---
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <title>{title}</title><meta name="description" content={description} />
+    {canonical && <link rel="canonical" href={canonical} />}
+    <link rel="alternate" hreflang={locale === 'es' ? 'en' : 'es'} href={withBase(alternate)} />
+    <link rel="icon" type="image/svg+xml" href={withBase('/favicon.svg')} /><link rel="sitemap" href={withBase('/sitemap-index.xml')} />
+    <meta property="og:type" content="website" /><meta property="og:title" content={title} /><meta property="og:description" content={description} />
+    {canonical && <meta property="og:url" content={canonical} />}{ogImage && <meta property="og:image" content={ogImage} />}<meta name="twitter:card" content="summary_large_image" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" />
+  </head>
+  <body>
+    <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:rounded focus:bg-card focus:px-3 focus:py-2">{t.skip}</a>
+    <header class="sticky top-0 z-40 border-b border-line/80 bg-paper/90 backdrop-blur-xl">
+      <div class="mx-auto flex max-w-6xl items-center justify-between gap-5 px-4 py-4 sm:px-6">
+        <a href={withBase(root)} class="flex items-center gap-3 font-semibold"><span class="logo-mark">MP</span><span class="hidden sm:inline">Melissa Pérez</span></a>
+        <nav aria-label="Main"><ul class="flex items-center gap-4 text-sm text-muted sm:gap-6">
+          {nav.map((n) => <li class={['experience','projects','skills'].includes(n.id) ? 'hidden md:block' : 'hidden sm:block'}><a href={withBase(`${root}#${n.id}`)} class="nav-link">{n.label}</a></li>)}
+          <li><a href={withBase(alternate)} class="language-switch" lang={locale === 'es' ? 'en' : 'es'} aria-label={`${t.language} language`}>{locale === 'es' ? 'EN' : 'ES'}</a></li>
+        </ul></nav>
+      </div>
+    </header>
+    <main id="main" class="mx-auto max-w-6xl px-4 sm:px-6"><slot /></main>
+    <footer class="mx-auto flex max-w-6xl flex-col gap-3 border-t border-line px-4 py-8 text-sm text-muted sm:flex-row sm:items-center sm:justify-between sm:px-6"><p>© {new Date().getFullYear()} {profile.name}</p><p>{t.availability}</p></footer>
+  </body>
+</html>

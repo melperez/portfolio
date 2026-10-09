@@ -1,0 +1,12 @@
+---
+import { render } from 'astro:content';
+import DetailPage from '../../components/DetailPage.astro';
+import { withBase } from '../../lib/paths';
+import { getProjects } from '../../lib/content';
+export async function getStaticPaths() { const entries = await getProjects(); return entries.map((entry) => ({ params: { slug: entry.id }, props: { entry } })); }
+const { entry } = Astro.props;
+const { title, summary, stack, repo, demo } = entry.data;
+const { Content } = await render(entry);
+const links = [...(demo ? [{ label: 'Live demo', url: demo }] : []), ...(repo ? [{ label: 'Source', url: repo }] : [])];
+---
+<DetailPage title={title} summary={summary} backHref={withBase('/#projects')} backLabel="Selected work" tags={stack} links={links} locale="en" alternatePath={`/es/projects/${entry.id}/`}><Content /></DetailPage>

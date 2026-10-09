@@ -1,0 +1,38 @@
+---
+import Card from './Card.astro';
+import { getExperience } from '../lib/content';
+import { formatRange, formatRangeEs } from '../lib/format';
+import { withBase } from '../lib/paths';
+import { experienceEs, ui, type Locale } from '../i18n';
+interface Props { locale?: Locale }
+const locale = Astro.props.locale ?? 'en';
+const t = ui[locale];
+const es = locale === 'es';
+const prefix = es ? '/es' : '';
+// Oldest first, so the timeline reads left to right toward the current role.
+const experience = (await getExperience()).reverse();
+---
+
+<div class="timeline-scroll" data-timeline>
+  <ol class="timeline">
+    {experience.map(({ id, data }) => {
+      const translated = es ? experienceEs[id] : undefined;
+      const current = !data.end;
+      return (
+        <li class:list={['timeline-item', { 'is-current': current }]}>
+          <p class="timeline-year">{data.start.slice(0, 4)}</p>
+          <div class="timeline-track" aria-hidden="true"><span class="timeline-dot"></span></div>
+          <p class="timeline-range">{es ? formatRangeEs(data.start, data.end) : formatRange(data.start, data.end)}</p>
+          <Card href={withBase(`${prefix}/experience/${id}/`)} title={translated?.role ?? data.role} meta={data.client ? `${data.company} · ${data.client}` : data.company} summary={translated?.summary ?? data.summary} tags={data.tech} detailsLabel={t.roleDetails} technologiesLabel={t.technologies} moreLabel={t.more} />
+        </li>
+      );
+    })}
+  </ol>
+</div>
+
+<script>
+  // On narrow screens the timeline scrolls sideways; start at the current role (the right end).
+  document.querySelectorAll<HTMLElement>('[data-timeline]').forEach((el) => {
+    if (el.scrollWidth > el.clientWidth) el.scrollLeft = el.scrollWidth;
+  });
+</script>

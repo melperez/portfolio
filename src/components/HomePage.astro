@@ -1,0 +1,40 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from './Hero.astro';
+import Section from './Section.astro';
+import Card from './Card.astro';
+import ExperienceTimeline from './ExperienceTimeline.astro';
+import SkillGroup from './SkillGroup.astro';
+import ContactBlock from './ContactBlock.astro';
+import AskWidget from './ask/AskWidget.astro';
+import { qa } from '../data/qa';
+import { qaEs } from '../data/qa.es';
+import { withBase } from '../lib/paths';
+import { getEducation, getProfile, getProjects, getSkills } from '../lib/content';
+import { educationEs, profileEs, projectsEs, skillGroupsEs, skillItemsEs, ui, type Locale } from '../i18n';
+
+interface Props { locale?: Locale }
+const locale = Astro.props.locale ?? 'en';
+const t = ui[locale];
+const es = locale === 'es';
+const [profile, projects, skills, education] = await Promise.all([getProfile(), getProjects(), getSkills(), getEducation()]);
+const prefix = es ? '/es' : '';
+const description = es ? profileEs.summary.slice(0, 160) : undefined;
+---
+<BaseLayout locale={locale} description={description}>
+  <Hero locale={locale} />
+  <Section id="experience" title={t.sections.experience}>
+    <ExperienceTimeline locale={locale} />
+  </Section>
+  <Section id="projects" title={t.sections.projects}>
+    <div class="grid gap-5 sm:grid-cols-2">
+      {projects.map(({ id, data }, index) => { const translated = es ? projectsEs[id] : undefined; return <Card href={withBase(`${prefix}/projects/${id}/`)} eyebrow={`${String(index + 1).padStart(2, '0')} / ${String(projects.length).padStart(2, '0')}`} title={translated?.title ?? data.title} summary={translated?.summary ?? data.summary} tags={data.stack} detailsLabel={t.details} technologiesLabel={t.technologies} moreLabel={t.more} />; })}
+    </div>
+  </Section>
+  <Section id="ask" title={t.sections.ask}><AskWidget locale={locale} email={profile.email} cvPdf={profile.cvPdf} items={es ? qaEs : qa} /></Section>
+  <Section id="skills" title={t.sections.skills}>
+    <div class="grid gap-7 sm:grid-cols-2 lg:grid-cols-3">{skills.map((s) => <SkillGroup group={es ? (skillGroupsEs[s.data.group] ?? s.data.group) : s.data.group} items={es ? s.data.items.map((i) => skillItemsEs[i] ?? i) : s.data.items} />)}</div>
+    {education.length > 0 && <div class="mt-14 border-t border-line pt-8"><h3 class="mb-5 font-serif text-2xl font-semibold">{t.sections.education}</h3><ul class="grid gap-3 sm:grid-cols-2">{education.map((e) => <li class="edu-item rounded-xl border border-line bg-card/60 p-4"><span class="font-medium">{es ? educationEs[e.id] ?? e.data.title : e.data.title}</span><span class="mt-1 block text-sm text-muted">{e.data.institution} · {e.data.year}</span></li>)}</ul></div>}
+  </Section>
+  <Section id="contact" title={t.sections.contact}><ContactBlock locale={locale} /></Section>
+</BaseLayout>

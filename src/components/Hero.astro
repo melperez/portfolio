@@ -1,0 +1,72 @@
+---
+import { getProfile } from '../lib/content';
+import { profileEs, ui, type Locale } from '../i18n';
+interface Props { locale?: Locale }
+const locale = Astro.props.locale ?? 'en';
+const t = ui[locale];
+const profile = await getProfile();
+const headline = locale === 'es' ? profileEs.headline : profile.headline;
+const summary = locale === 'es' ? profileEs.summary : profile.summary.trim();
+// Retro editor panel: the most-used stack across the highlighted projects, backend first, as a C# collection in rows of 3
+const stack = [
+  '.NET / C#', 'REST APIs', 'Azure Functions',
+  'Azure Service Bus', 'RabbitMQ', 'SQL',
+  'Python', 'React', 'Claude Code',
+];
+const stackRows = Array.from({ length: Math.ceil(stack.length / 3) }, (_, i) => stack.slice(i * 3, i * 3 + 3));
+---
+
+<section class="hero-grid relative py-20 sm:py-28">
+  <div class="hero-copy relative mx-auto max-w-4xl text-center">
+  <p class="eyebrow mb-5 justify-center"><span></span>{headline}<span></span></p>
+  <p class="mb-2 text-sm text-muted">{t.hero.intro}</p>
+  <h1 class="font-serif text-5xl leading-[0.98] font-semibold tracking-tight sm:text-7xl">{profile.name}</h1>
+  <p class="hero-summary mx-auto mt-7 max-w-3xl text-lg leading-8 text-ink/80 sm:text-xl">{summary}</p>
+  <div class="hero-actions mt-9 flex flex-wrap justify-center gap-3">
+    <a
+      href="#experience"
+      class="button-primary"
+    >
+      {t.hero.primary} <span aria-hidden="true">↓</span>
+    </a>
+    <a
+      href={profile.cvPdf}
+      class="button-secondary"
+      download
+    >
+      {t.hero.secondary}
+    </a>
+  </div>
+  <a href="#ask" class="hero-ask-link">
+    <svg class="pixel-pet" viewBox="0 0 24 24" aria-hidden="true" shape-rendering="crispEdges">
+      <path d="M4 5h3v3h2V7h6v1h2V5h3v12h-2v2H6v-2H4V5Zm2 3v8h2v1h8v-1h2V8h-1v2h-2V9H9v1H7V8H6Z" fill="currentColor" />
+      <path d="M8 11h2v2H8v-2Zm6 0h2v2h-2v-2Zm-4 3h4v2h-4v-2Z" fill="currentColor" />
+    </svg>
+    <span>{t.hero.ask}</span><span aria-hidden="true">→</span>
+  </a>
+  <ul class="hero-signals" aria-label={locale === 'es' ? 'Especialidades principales' : 'Core specialties'}>
+    <li><span aria-hidden="true">01</span>.NET / C#</li>
+    <li><span aria-hidden="true">02</span>Cloud systems</li>
+    <li><span aria-hidden="true">03</span>Applied AI</li>
+  </ul>
+  </div>
+  <!-- C# editor panel (styled in theme.css) -->
+  <div class="hero-code" aria-hidden="true">
+    <div class="hero-code-tabs"><p class="active"><span class="cs">C#</span>Developer.cs</p><p>Program.cs</p></div>
+    <pre><code><span class="cl"><span class="kw">namespace</span> <span class="ty">Portfolio</span>;</span>
+<span class="cl"></span>
+<span class="cl"><span class="cm">/// &lt;summary&gt;{headline}&lt;/summary&gt;</span></span>
+<span class="cl"><span class="kw">public sealed record</span> <span class="ty">Developer</span></span>
+<span class="cl">{'{'}</span>
+<span class="cl">    <span class="kw">public string</span> <span class="pr">Name</span> =&gt; <span class="st">"{profile.name}"</span>;</span>
+<span class="cl">    <span class="kw">public string</span> <span class="pr">Experience</span> =&gt; <span class="st">"10+ years"</span>;</span>
+<span class="cl">    <span class="kw">public string</span>[] <span class="pr">Stack</span> =&gt;</span>
+<span class="cl">    [</span>
+{stackRows.map((row, i) => <span class="cl">        {row.map((item, j) => <Fragment><span class="st">"{item}"</span>{j < row.length - 1 || i < stackRows.length - 1 ? ', ' : ''}</Fragment>)}</span>)}
+<span class="cl">    ];</span>
+<span class="cl"></span>
+<span class="cl">    <span class="cm">// {t.availability}</span></span>
+<span class="cl">{'}'}<span class="cursor">|</span></span></code></pre>
+    <div class="hero-code-status"><p>main</p><p>C# · UTF-8 · LF</p></div>
+  </div>
+</section>

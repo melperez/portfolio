@@ -1,0 +1,6 @@
+[
+  { "id": "unac", "kind": "degree", "title": "B.Tech in Systems Engineering", "institution": "UNAC - Adventist University Corporation", "year": "2011 – 2014" },
+  { "id": "az-204", "kind": "course", "title": "AZ-204 Developing Solutions for Microsoft Azure", "institution": "Udemy", "year": "2024" },
+  { "id": "security-practitioner", "kind": "course", "title": "Software Security Practitioner .NET", "institution": "Security Compass", "year": "2020" },
+  { "id": "pci-ssl", "kind": "course", "title": "PCI Secure Software Lifecycle", "institution": "Security Compass", "year": "2019" }
+]

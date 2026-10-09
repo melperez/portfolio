@@ -1,0 +1,13 @@
+---
+import { render } from 'astro:content';
+import DetailPage from '../../components/DetailPage.astro';
+import { withBase } from '../../lib/paths';
+import { getExperience } from '../../lib/content';
+import { formatRange } from '../../lib/format';
+export async function getStaticPaths() { const entries = await getExperience(); return entries.map((entry) => ({ params: { slug: entry.id }, props: { entry } })); }
+const { entry } = Astro.props;
+const { role, company, client, location, start, end, summary, tech } = entry.data;
+const { Content } = await render(entry);
+const meta = [client ? `${company} · Client: ${client}` : company, [formatRange(start, end), location].filter(Boolean).join(' · ')];
+---
+<DetailPage title={role} summary={summary} backHref={withBase('/#experience')} backLabel="Experience" meta={meta} tags={tech} kind="experience" locale="en" alternatePath={`/es/experience/${entry.id}/`}><Content /></DetailPage>

@@ -1,0 +1,57 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --color-paper: #f8f8fb;
+  --color-ink: #171525;
+  --color-muted: #666274;
+  --color-line: #dedce6;
+  --color-card: #ffffff;
+  --color-accent: #5a3eb5;
+  --color-accent-soft: #eeeafd;
+}
+
+@layer base {
+  html { color-scheme: light; scroll-behavior: smooth; }
+  body { @apply bg-paper text-ink font-sans antialiased; background-image: radial-gradient(circle at 82% 4%, rgba(107, 78, 190, .12), transparent 27rem); }
+  ::selection { background: #d9ccf2; color: #1f1a2e; }
+  :focus-visible { @apply outline-2 outline-offset-2 outline-accent; }
+  a, button { transition: color .2s ease, background-color .2s ease, border-color .2s ease, transform .2s ease; }
+}
+
+@layer components {
+  .logo-mark { @apply grid h-9 w-9 place-items-center rounded-[10px] bg-ink text-[11px] font-bold tracking-wider text-paper; font-family: var(--font-mono); }
+  .nav-link { @apply relative py-2 hover:text-ink; }
+  .nav-link::after { content: ''; @apply absolute bottom-0 left-0 h-px w-0 bg-accent transition-all; }
+  .nav-link:hover::after { @apply w-full; }
+  .language-switch { @apply grid h-9 min-w-9 place-items-center rounded-full border border-line bg-card px-2 text-xs font-bold text-ink hover:border-accent hover:text-accent; }
+  .eyebrow { @apply flex items-center gap-3 text-xs font-bold tracking-[.16em] text-accent uppercase; }
+  .eyebrow span { @apply h-px w-8 bg-accent; }
+  .button-primary { @apply inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3 text-sm font-semibold text-paper shadow-[0_7px_20px_rgba(23,21,37,.12)] hover:-translate-y-0.5 hover:bg-accent; }
+  .button-secondary { @apply inline-flex items-center rounded-full border border-line bg-card/70 px-6 py-3 text-sm font-semibold hover:-translate-y-0.5 hover:border-ink; }
+  .card { @apply rounded-2xl border border-line bg-card/90 shadow-[0_8px_30px_rgba(31,25,55,.04)] backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:border-accent/50 hover:shadow-[0_16px_45px_rgba(31,25,55,.09)]; }
+  .ask-panel { @apply rounded-3xl border border-line bg-[#efebf7]; }
+  .question-card { @apply overflow-hidden rounded-2xl border border-line bg-card/80 transition-colors hover:border-accent/40; }
+  .question-card[open] { @apply border-accent/40 bg-card shadow-sm; }
+  .question-card summary::-webkit-details-marker { display: none; }
+  .question-card[open] .question-icon { transform: rotate(45deg); }
+  .question-icon { @apply text-xl leading-none transition-transform; }
+
+  /* Experience timeline: horizontal; swipes on narrow screens, fits in one row from lg up */
+  .timeline-scroll { margin-inline: -1rem; padding: .25rem 0 1rem; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: 1rem; scrollbar-width: thin; }
+  .timeline { display: grid; grid-auto-flow: column; grid-auto-columns: 78vw; gap: 1.25rem; width: max-content; min-width: 100%; padding-inline: 1rem; }
+  .timeline-item { display: flex; flex-direction: column; scroll-snap-align: start; }
+  .timeline-item > .card { flex: 1; }
+  .timeline-year { font-family: var(--font-serif); font-size: 1.6rem; font-weight: 600; line-height: 1; letter-spacing: -.02em; }
+  .timeline-track { position: relative; height: 1.5rem; margin: .75rem 0 .5rem; }
+  .timeline-track::before { content: ''; position: absolute; top: 50%; left: 0; right: -1.25rem; height: 1px; background: var(--color-line); }
+  .timeline-item:last-child .timeline-track::before { right: 0; }
+  .timeline-item.is-current .timeline-track::before { background: repeating-linear-gradient(90deg, var(--color-accent) 0 6px, transparent 6px 12px); opacity: .6; }
+  .timeline-dot { position: absolute; top: 50%; left: 0; width: .9rem; height: .9rem; translate: 0 -50%; border: 2px solid var(--color-accent); border-radius: 999px; background: var(--color-paper); }
+  .timeline-item.is-current .timeline-dot { background: var(--color-accent); box-shadow: 0 0 0 5px var(--color-accent-soft); }
+  .timeline-range { margin-bottom: .9rem; font-size: .75rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--color-accent); }
+  @media (min-width: 640px) { .timeline { grid-auto-columns: 42vw; } }
+  @media (min-width: 1024px) { .timeline-scroll { overflow: visible; margin-inline: 0; } .timeline { grid-auto-columns: 1fr; width: auto; padding-inline: 0; } }
+}

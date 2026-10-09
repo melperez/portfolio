@@ -1,0 +1,23 @@
+---
+interface Props {
+  tags: string[];
+  label: string;
+  /** Show at most this many, then "+N {moreLabel}". */
+  max?: number;
+  moreLabel?: string;
+}
+const { tags, label, max = tags.length, moreLabel = 'more' } = Astro.props;
+const shown = tags.slice(0, max);
+const hidden = tags.length - shown.length;
+---
+
+{
+  tags.length > 0 && (
+    <ul class="flex flex-wrap gap-1.5" aria-label={label}>
+      {shown.map((t) => (
+        <li class="tag rounded-full bg-accent-soft px-2.5 py-1 text-xs font-medium text-accent">{t}</li>
+      ))}
+      {hidden > 0 && <li class="px-1 py-0.5 text-xs text-muted">+{hidden} {moreLabel}</li>}
+    </ul>
+  )
+}

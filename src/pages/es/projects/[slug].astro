@@ -1,0 +1,13 @@
+---
+import DetailPage from '../../../components/DetailPage.astro';
+import { withBase } from '../../../lib/paths';
+import { getProjects } from '../../../lib/content';
+import { projectsEs } from '../../../i18n';
+export async function getStaticPaths() { const entries = await getProjects(); return entries.map((entry) => ({ params: { slug: entry.id }, props: { entry } })); }
+const { entry } = Astro.props;
+const translated = projectsEs[entry.id];
+const links = [...(entry.data.demo ? [{ label: 'Demo', url: entry.data.demo }] : []), ...(entry.data.repo ? [{ label: 'Código fuente', url: entry.data.repo }] : [])];
+---
+<DetailPage title={translated.title} summary={translated.summary} backHref={withBase('/es/#projects')} backLabel="Proyectos destacados" tags={entry.data.stack} links={links} locale="es" alternatePath={`/projects/${entry.id}/`}>
+  <p>{translated.intro}</p><ul>{translated.items.map((item) => <li>{item}</li>)}</ul>
+</DetailPage>

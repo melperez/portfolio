@@ -1,0 +1,13 @@
+---
+import TagList from './TagList.astro';
+interface Props { href: string; title: string; eyebrow?: string; meta?: string; summary: string; tags: string[]; detailsLabel?: string; technologiesLabel?: string; moreLabel?: string; }
+const { href, title, eyebrow, meta, summary, tags, detailsLabel = 'View case study', technologiesLabel = 'Technologies', moreLabel = 'more' } = Astro.props;
+---
+<article class="card group relative flex flex-col p-6 sm:p-7">
+  {eyebrow && <p class="mb-2 text-xs font-semibold tracking-[0.12em] text-accent uppercase">{eyebrow}</p>}
+  <h3 class="font-serif text-xl font-semibold leading-snug"><a href={href} class="after:absolute after:inset-0 group-hover:text-accent">{title}</a></h3>
+  {meta && <p class="mt-1 text-sm text-muted">{meta}</p>}
+  <p class="mt-4 flex-1 text-sm leading-6 text-ink/75">{summary}</p>
+  <div class="mt-5"><TagList tags={tags} label={technologiesLabel} max={5} moreLabel={moreLabel} /></div>
+  <p class="mt-5 text-sm font-semibold text-accent" aria-hidden="true">{detailsLabel} <span class="inline-block transition-transform group-hover:translate-x-1">→</span></p>
+</article>

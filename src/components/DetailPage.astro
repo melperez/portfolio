@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import TagList from './TagList.astro';
+import { ui, type Locale } from '../i18n';
+interface Props { title: string; summary: string; backHref: string; backLabel: string; meta?: string[]; tags: string[]; links?: { label: string; url: string }[]; locale?: Locale; alternatePath?: string; kind?: 'project' | 'experience'; }
+const { title, summary, backHref, backLabel, meta = [], tags, links = [], locale = 'en', alternatePath, kind = 'project' } = Astro.props;
+const t = ui[locale];
+---
+<BaseLayout title={`${title} · Melissa Pérez`} description={summary} locale={locale} alternatePath={alternatePath}>
+  <article class="py-16 sm:py-24">
+    <a href={backHref} class="inline-flex items-center gap-2 text-sm font-semibold text-accent hover:gap-3">← {backLabel}</a>
+    <header class="mt-8 max-w-4xl">
+      <p class="eyebrow mb-5"><span></span>{kind === 'experience' ? (locale === 'es' ? 'Experiencia' : 'Experience') : (locale === 'es' ? 'Caso de estudio' : 'Case study')}</p>
+      <h1 class="font-serif text-4xl font-semibold leading-tight tracking-tight sm:text-6xl">{title}</h1>
+      <div class="mt-5 flex flex-wrap gap-x-5 gap-y-1 text-sm text-muted">{meta.map((m) => <p>{m}</p>)}</div>
+      <p class="mt-7 max-w-3xl text-xl leading-8 text-ink/75">{summary}</p>
+      <div class="mt-6"><TagList tags={tags} label={t.technologies} /></div>
+    </header>
+    <div class="detail-body mt-12 max-w-3xl border-t border-line pt-10 leading-7"><slot /></div>
+    {links.length > 0 && <p class="mt-10 flex gap-5">{links.map((l) => <a href={l.url} class="font-semibold text-accent underline underline-offset-4">{l.label} ↗</a>)}</p>}
+  </article>
+</BaseLayout>
+<style>
+  .detail-body :global(h2), .detail-body :global(strong) { font-family: var(--font-display); font-size: 1.35rem; color: var(--color-ink); }
+  .detail-body :global(p + p), .detail-body :global(p + ul) { margin-top: 1rem; }
+  .detail-body :global(ul + p), .detail-body :global(ul + h2) { margin-top: 2.2rem; }
+  .detail-body :global(ul) { list-style: none; padding: 0; margin-top: 1rem; }
+  .detail-body :global(li) { position: relative; padding-left: 1.4rem; color: color-mix(in srgb, var(--color-ink) 78%, transparent); }
+  .detail-body :global(li)::before { content: '→'; position: absolute; left: 0; color: var(--color-accent); }
+  .detail-body :global(li + li) { margin-top: .75rem; }
+</style>

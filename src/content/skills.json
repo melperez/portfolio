@@ -1,0 +1,11 @@
+[
+  { "id": "backend", "group": "Backend", "items": [".NET / C# (Framework, Core, 6–10+)", "ASP.NET Core", "EF Core", "REST & SOAP APIs", "Python"] },
+  { "id": "frontend", "group": "Frontend", "items": ["Angular", "React", "TypeScript"] },
+  { "id": "cloud", "group": "Cloud", "items": ["Azure", "GCP", "AWS"] },
+  { "id": "data", "group": "Data", "items": ["SQL Server", "PostgreSQL", "MySQL", "MongoDB", "Azure Table Storage"] },
+  { "id": "architecture", "group": "Architecture & messaging", "items": ["Microservices", "Event-Driven Architecture", "RabbitMQ", "Azure Service Bus"] },
+  { "id": "ai", "group": "Generative AI", "items": ["GenAI", "RAG", "Vertex AI", "MCP", "LangChain", "LangGraph"] },
+  { "id": "devops", "group": "DevOps & tools", "items": ["Docker", "Azure DevOps", "CI/CD", "Git", "GitHub Copilot", "Claude Code"] },
+  { "id": "testing", "group": "Testing", "items": ["xUnit", "MSTest"] },
+  { "id": "languages", "group": "Languages", "items": ["English (Advanced)", "Spanish (Native)"] }
+]

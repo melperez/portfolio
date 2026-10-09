@@ -1,0 +1,15 @@
+---
+import DetailPage from '../../../components/DetailPage.astro';
+import { withBase } from '../../../lib/paths';
+import { getExperience } from '../../../lib/content';
+import { formatRangeEs } from '../../../lib/format';
+import { experienceEs, ui } from '../../../i18n';
+export async function getStaticPaths() { const entries = await getExperience(); return entries.map((entry) => ({ params: { slug: entry.id }, props: { entry } })); }
+const { entry } = Astro.props;
+const { company, client, location, start, end, tech } = entry.data;
+const translated = experienceEs[entry.id];
+const meta = [client ? `${company} · ${ui.es.client}: ${client}` : company, [formatRangeEs(start, end), location].filter(Boolean).join(' · ')];
+---
+<DetailPage title={translated.role} summary={translated.summary} backHref={withBase('/es/#experience')} backLabel="Experiencia" meta={meta} tags={tech} kind="experience" locale="es" alternatePath={`/experience/${entry.id}/`}>
+  {translated.sections.map((section) => <section>{section.heading && <h2>{section.heading}</h2>}<ul>{section.items.map((item) => <li>{item}</li>)}</ul></section>)}
+</DetailPage>
