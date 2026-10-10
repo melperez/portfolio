@@ -18,8 +18,10 @@ const nav = [
   { id: 'ask', label: t.nav.ask }, { id: 'skills', label: t.nav.skills }, { id: 'contact', label: t.nav.contact },
 ];
 const current = Astro.url.pathname;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const sitePath = base && current.startsWith(`${base}/`) ? current.slice(base.length) : current;
 let alternate = Astro.props.alternatePath;
-if (!alternate) alternate = locale === 'es' ? current.replace(/\/es(?=\/|$)/, '') || '/' : `/es${current}`;
+if (!alternate) alternate = locale === 'es' ? sitePath.replace(/\/es(?=\/|$)/, '') || '/' : `/es${sitePath}`;
 ---
 <!doctype html>
 <html lang={locale}>
