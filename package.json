@@ -11,7 +11,9 @@
     "preview": "astro preview",
     "astro": "astro",
     "test": "vitest run tests/unit.test.ts",
-    "check": "astro check"
+    "check": "astro check",
+    "cv": "node scripts/build-cv.mjs",
+    "og": "node scripts/build-cv.mjs --og"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",

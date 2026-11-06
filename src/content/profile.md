@@ -1,6 +1,6 @@
 ---
 name: Melissa Pérez Cadavid
-headline: Senior Software Developer
+headline: Senior .NET & Full-Stack Developer
 email: perez.cadavidm@gmail.com
 cvPdf: /Melissa-CV-Web.pdf
 links:
@@ -8,4 +8,4 @@ links:
     url: https://www.linkedin.com/in/mel-perez
 ---
 
-Senior Software Developer with 10+ years of experience building cloud-native and microservices-based applications with .NET (C#), React, and Angular on Azure, AWS, and GCP. Experienced in the financial and banking sectors, supporting team leadership, mentoring developers, and contributing to architecture decisions in Agile environments. Designs APIs, event-driven systems, and enterprise integrations with a focus on quality and security. Also has hands-on experience with generative AI, including a RAG-based agentic solution built with Python and LangChain.
+Senior Software Developer with 10+ years of experience building enterprise web applications, APIs, and microservices using .NET (C#), Python, React, and Angular. Builds cloud-ready applications that integrate with Azure and GCP services such as Azure Functions, Cloud Run, Service Bus, and Key Vault / Secret Manager. Proven experience in banking and financial environments, contributing to technical design, code reviews, and Agile team collaboration, along with hands-on experience developing generative AI workflows with Python, LangChain, and Vertex AI.

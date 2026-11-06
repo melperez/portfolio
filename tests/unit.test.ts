@@ -3,8 +3,8 @@ import { qa } from '../src/data/qa';
 import { formatRange } from '../src/lib/format';
 
 describe('qa data', () => {
-  it('has six questions with unique ids', () => {
-    expect(qa).toHaveLength(6);
+  it('has nine questions with unique ids', () => {
+    expect(qa).toHaveLength(9);
     expect(new Set(qa.map((q) => q.id)).size).toBe(qa.length);
   });
 

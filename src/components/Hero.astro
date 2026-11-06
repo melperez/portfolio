@@ -9,8 +9,8 @@ const headline = locale === 'es' ? profileEs.headline : profile.headline;
 const summary = locale === 'es' ? profileEs.summary : profile.summary.trim();
 // Retro editor panel: the most-used stack across the highlighted projects, backend first, as a C# collection in rows of 3
 const stack = [
-  '.NET / C#', 'REST APIs', 'Azure Functions',
-  'Azure Service Bus', 'RabbitMQ', 'SQL',
+  '.NET 10 / C#', 'REST APIs', 'Azure Service Bus',
+  'Cloud Run', 'SQL', 'pgvector',
   'Python', 'React', 'Claude Code',
 ];
 const stackRows = Array.from({ length: Math.ceil(stack.length / 3) }, (_, i) => stack.slice(i * 3, i * 3 + 3));

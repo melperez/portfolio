@@ -2,18 +2,15 @@
 role: Senior Full-Stack Developer
 company: Hireworks
 client: Togetherhood Inc
-# CONFIRM: the CV only says "Present". Start inferred from the Globant engagement ending January 2026.
-summary: "Full-stack .NET and React development, architectural leadership, third-party integrations, and human-led AI-assisted engineering workflows with Claude Code."
-start: "2026-01"
-tech: [.NET 10, React, Vite, MySQL, Docker, Hangfire, AWS, Datadog, Claude Code]
+# CONFIRM: the CV only says "Present". Start inferred from the Globant engagement ending April 2026.
+summary: "Full-stack .NET 10 and React development, third-party integrations, architectural leadership, and human-led AI-assisted engineering workflows with Claude Code."
+start: "2026-04"
+tech: [.NET 10, C#, React, Vite, MySQL, Docker, Hangfire, AWS, Datadog, Webhooks, REST APIs, Checkr, DocuSign, Sakari SMS, Notion API, Claude Code]
 ---
 
-- Develop and implement software using .NET 10, including integrations with third parties such as Checkr, DocuSign, Sakari SMS, and Notion through webhooks and APIs.
-- Develop and maintain software using React and Vite.
-- Participate in proof-of-concept (POC) initiatives to integrate third-party services and platforms.
-- Contribute to architectural design and provide technical specifications to the team.
-- Optimize applications using monitoring and analytics tools such as Datadog.
-- Lead architectural decisions, database changes, and design-pattern selection while using Claude Code as a development and problem-solving collaborator.
-- Review AI-generated code to preserve the project's architecture, coding standards, security practices, and maintainability expectations.
-- Create specialized subagents and reusable skills to automate sprint activities, including pre-PR security reviews and database migration workflows.
-- Integrate .NET projects with MySQL and Hangfire for background processing and scheduled jobs.
+- Engineered backend services in .NET 10 integrating third-party platforms (Checkr, DocuSign, Sakari SMS, Notion) via webhooks and REST APIs.
+- Developed and maintained web applications using React and Vite within a containerized environment (Docker, AWS).
+- Led architectural decisions, database changes, and design-pattern selection while using Claude Code as a development collaborator.
+- Reviewed AI-generated code to ensure alignment with project architecture, security, and maintainability expectations.
+- Built specialized subagents and reusable skills to automate repetitive sprint activities, including pre-PR security reviews and database migration workflows.
+- Integrated .NET 10 applications with MySQL and Hangfire for scheduled background tasks, using Datadog for system performance monitoring.

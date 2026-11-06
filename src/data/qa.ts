@@ -13,7 +13,7 @@ export const qa: QA[] = [
     id: 'gcp-genai',
     question: 'Do you have experience with GCP and GenAI?',
     answer:
-      'Yes. As a Senior .NET Developer at Globant, I developed Python APIs integrating Gemini via Vertex AI, using LangChain and LangGraph for agent orchestration. I implemented RAG workflows using vectorized data and MCP servers for AI agent integrations, and built .NET APIs and cloud solutions on Google Cloud Platform, working with BigQuery and Google Cloud Logging.',
+      'Yes. As a Senior .NET & Full-Stack Developer at Globant, I developed Python APIs integrating Gemini via Vertex AI, using LangChain and LangGraph for agent orchestration. I implemented RAG workflows over PostgreSQL (pgvector) and MCP servers, and configured Cloud Run jobs with Cloud Scheduler to process embeddings for a SQL agent that queried BigQuery. I also built containerized .NET APIs on Cloud Run with Secret Manager.',
   },
   {
     id: 'banking',
@@ -31,7 +31,7 @@ export const qa: QA[] = [
     id: 'event-driven',
     question: 'What is your experience with event-driven architecture and messaging?',
     answer:
-      'As a Senior .NET Developer at Globant, I designed, implemented, and maintained distributed message queue architectures with Azure Service Bus, including dead-letter queues, retry policies, circuit breaker patterns, and resilient asynchronous communication. Earlier, at Inaltec SAS, I built middleware and microservices using RabbitMQ and Azure services. Microservices and event-driven architecture are among my key skills.',
+      'As a Senior .NET & Full-Stack Developer at Globant, I designed, implemented, and maintained distributed message queue architectures with Azure Service Bus, including dead-letter queues, retry policies, circuit breaker patterns, and resilient asynchronous communication. Earlier, at Inaltec SAS, I built middleware and microservices using RabbitMQ and Azure services. Microservices and event-driven architecture are among my key skills.',
   },
   {
     id: 'ai-tools',
@@ -43,6 +43,24 @@ export const qa: QA[] = [
     id: 'recent-role',
     question: 'What is your most recent role?',
     answer:
-      "I'm a Senior Full-Stack Developer at Hireworks, working with Togetherhood Inc. I lead architecture, database, and design-pattern decisions while developing .NET 10 and React applications and third-party integrations. I use Claude Code under human review and create specialized agents and skills that automate security checks, database migrations, and other repetitive activities across the sprint delivery lifecycle.",
+      "I'm a Senior Full-Stack Developer at Hireworks, working with Togetherhood Inc. I build .NET 10 backend services integrating Checkr, DocuSign, Sakari SMS, and Notion through webhooks and REST APIs, plus React and Vite apps on Docker and AWS, and I lead architecture, database, and design-pattern decisions. I use Claude Code under human review and create specialized agents and skills that automate security checks, database migrations, and other repetitive activities across the sprint delivery lifecycle.",
+  },
+  {
+    id: 'integrations',
+    question: 'Have you built third-party integrations and webhooks?',
+    answer:
+      'Yes. At Hireworks I engineer .NET 10 backend services that integrate Checkr, DocuSign, Sakari SMS, and Notion through webhooks and REST APIs, with Hangfire handling scheduled background jobs and Datadog monitoring performance. Earlier, at Inaltec SAS, I designed SOAP and REST APIs that connected banking platforms with third-party and legacy systems.',
+  },
+  {
+    id: 'vector-search',
+    question: 'What is your experience with vector search and embeddings?',
+    answer:
+      'At Globant I implemented RAG workflows over vectorized data stored in PostgreSQL with pgvector, used by Python agents built with LangChain and LangGraph on Vertex AI. I also configured Cloud Run jobs triggered by Cloud Scheduler to process vector embeddings, feeding an automated SQL agent that queried BigQuery for data analytics.',
+  },
+  {
+    id: 'azure',
+    question: 'What is your experience with Microsoft Azure?',
+    answer:
+      'Azure has been a core part of my work. At Globant I designed Azure Service Bus architectures with dead-letter queues, retry policies, and circuit breakers, built an AI recommendation POC on Azure Functions with Azure Personalizer, managed secrets in Key Vault, used Azure Table Storage, maintained Azure DevOps YAML pipelines, and diagnosed production issues with Azure Monitor. At Inaltec SAS I worked with Entra ID and Key Vault, and I completed AZ-204 training in 2024.',
   },
 ];
