@@ -1,5 +1,5 @@
 // Prints scripts/public-cv.html to public/Melissa-CV-Web.pdf with a local Edge or Chrome.
-// Run `npm run cv` after editing the HTML, then check the PDF is still one page.
+// Run `npm run cv` after editing the HTML, then check the PDF remains within two pages.
 // `npm run og` instead screenshots scripts/og-image.html to public/og-image.png.
 // Optional: set BROWSER to a Chromium-based executable path.
 import { execFileSync } from 'node:child_process';

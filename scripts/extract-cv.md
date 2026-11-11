@@ -4,7 +4,7 @@ The PDF is converted once into structured files. Pages and the "Ask" assistant b
 these files, so they never disagree. When the CV changes, update these files (and replace
 the PDF) rather than editing pages.
 
-1. Edit the sanitized `scripts/public-cv.html` (no Globant client names) and run `npm run cv` to print it to `public/Melissa-CV-Web.pdf`. Check it is still one page. Run `npm run og` if the headline changes.
+1. Edit the sanitized `scripts/public-cv.html` (no Globant client names) and run `npm run cv` to print it to `public/Melissa-CV-Web.pdf`. Check it remains readable and within two pages. Run `npm run og` if the headline changes.
 2. Fill in, replacing every `PLACEHOLDER`:
    - `src/content/profile.md`: name, headline, location, email, links in frontmatter; summary as the body.
    - `src/content/experience/*.md`: one file per role. Name files so they read well (e.g. `2023-acme.md`).
